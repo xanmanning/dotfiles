@@ -77,8 +77,8 @@ call matchadd('OverspillColumn', '\%81v', 100)
 set tabstop=4
 set shiftwidth=4
 
-" Enable spelling, make it English.
-set spell
+" Set spelling to English. Disable for now.
+set nospell
 set spelllang=en
 set spellsuggest=10
 
