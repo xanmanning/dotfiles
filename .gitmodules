@@ -1,0 +1,6 @@
+[submodule "lib/vim/colors/jellybeans"]
+	path = lib/vim/colors/jellybeans
+	url = git://github.com/nanotech/jellybeans.vim.git
+[submodule "lib/vim/colors/solarized"]
+	path = lib/vim/colors/solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
