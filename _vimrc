@@ -56,16 +56,19 @@ set foldlevel=1
 " Encrypted file cipher
 set cm=blowfish
 
+" Set invisible characters
+set listchars=tab:>-,trail:.,nbsp:.,extends:>,precedes:<,eol:$
+
 " Variable to get the current file name.
 let b:currentfile = expand('%:p')
 
 " Draw a line at 80 columns width
 if &t_Co >= 256 && &bg == "dark"
-  highlight ColorColumn ctermbg=233 guibg=#202020
+	highlight ColorColumn ctermbg=233 guibg=#202020
 elseif &t_Co >= 256 && &bg != "dark"
-  highlight ColorColumn ctermbg=230 guibg=#e8e9eb
+	highlight ColorColumn ctermbg=230 guibg=#e8e9eb
 else
-  highlight ColorColumn ctermbg=8
+	highlight ColorColumn ctermbg=8
 endif
 set colorcolumn=80
 
@@ -76,6 +79,9 @@ call matchadd('OverspillColumn', '\%81v', 100)
 " Indenting and shift width
 set tabstop=4
 set shiftwidth=4
+
+" Expandtabs into spaces
+set expandtab
 
 " Set spelling to English. Disable for now.
 set nospell
@@ -105,21 +111,21 @@ set nomodeline
 set backup
 
 " Swapfile handling
-" Stop duplicated editing of files.
+" Stop duplicated editing of files
 " 	- When swap is newer than file then open read only by default
 " 	- When swap file is older than file then delete swap file, continue.
 augroup NoSimultaneousEdits
-    autocmd!
-    autocmd SwapExists * let b:filename = expand('%:p')
-    autocmd SwapExists * if getftime(v:swapname) < getftime(b:filename)
-        autocmd SwapExists * call delete(v:swapname)
-        autocmd SwapExists * let v:swapchoice = 'e'
-        autocmd SwapExists * echo "Old swapfile deleted."
-    autocmd SwapExists * else
-        autocmd SwapExists * let v:swapchoice = 'o'
-        autocmd SwapExists * echo "Duplicate edit session (readonly)"
-    autocmd SwapExists * endif
-    autocmd SwapExists * sleep 2 
+	autocmd!
+	autocmd SwapExists * let b:filename = expand('%:p')
+	autocmd SwapExists * if getftime(v:swapname) < getftime(b:filename)
+		autocmd SwapExists * call delete(v:swapname)
+		autocmd SwapExists * let v:swapchoice = 'e'
+		autocmd SwapExists * echo "Old swapfile deleted."
+	autocmd SwapExists * else
+		autocmd SwapExists * let v:swapchoice = 'o'
+		autocmd SwapExists * echo "Duplicate edit session (readonly)"
+	autocmd SwapExists * endif
+	autocmd SwapExists * sleep 2
 augroup END
 
 " Function for handling copy
@@ -143,41 +149,41 @@ endfunction
 if has('win32')
 	" If we have a currentfile set, change directory to
 	" $USERPROFILE (Windows Specific)
-    if strlen(b:currentfile) < 1 
-        chdir $USERPROFILE
-    endif
+	if strlen(b:currentfile) < 1 
+		chdir $USERPROFILE
+	endif
 	
 	" Backup file path on Windows
-    set backupdir=~/vimfiles/backup
+	set backupdir=~/vimfiles/backup
 
 	" Temp file path on Windows
-    set directory=~/vimfiles/tmp
+	set directory=~/vimfiles/tmp
 
 	" Auto change directory on file opening.
-    set autochdir
+	set autochdir
 else
 	" *NIX Config
-    if has('unix')
+	if has('unix')
 		" If we have a currentfile set, change directory to
 		" $HOME (*NIX Specific)
-        if strlen(b:currentfile) < 1
-            chdir $HOME
-        endif
+		if strlen(b:currentfile) < 1
+			chdir $HOME
+		endif
 
 		" Find the system name, ie. Darwin or Linux?
-        let s:uname = system("echo -n \"$(uname)\"")
+		let s:uname = system("echo -n \"$(uname)\"")
 
 		" Non Mac OS X Config
-        if s:uname != "Darwin"
-            set autochdir
-        endif
-		
+		if s:uname != "Darwin"
+			set autochdir
+		endif
+
 		" Backup file path on *NIX
-        set backupdir=~/.vim/backup
+		set backupdir=~/.vim/backup
 
 		" Temp file path on *NIX
-        set directory=~/.vim/tmp
-    endif
+		set directory=~/.vim/tmp
+	endif
 endif
 
 
@@ -224,35 +230,35 @@ endif
 " == GUI Settings ==
 "
 if has('gui_running')
-    " Highlight cursor column
-    set cursorcolumn
+	" Highlight cursor column
+	set cursorcolumn
 
 	" Highlight cursor line
-    set cursorline
+	set cursorline
 
 	" Set the default size of the editor
-    set lines=24 columns=88
+	set lines=24 columns=88
 
 	" Remove menus
-    set guioptions-=m
+	set guioptions-=m
 
 	" Remove toolbar
-    set guioptions-=T
+	set guioptions-=T
 
 	" Remove scrollbar
-    set guioptions-=r
+	set guioptions-=r
 
-    " Windows GUI needs a good font, Hack FTW! Else Consolas.
-    if has('win32')
+	" Windows GUI needs a good font, Hack FTW! Else Consolas.
+	if has('win32')
 		silent! set guifont=Hack
 		if &guifont != 'Hack'
-	        set guifont=Consolas
+			set guifont=Consolas
 		endif
-    endif
+	endif
 
-    " Auto and Smart Indenting on.
-    set autoindent
-    set smartindent
-    filetype indent on
+	" Auto and Smart Indenting on.
+	set autoindent
+	set smartindent
+	filetype indent on
 endif
 
