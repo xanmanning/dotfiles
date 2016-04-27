@@ -14,20 +14,43 @@ if [ ${#} -gt 0 ] ; then
 	echo "Installing config files (${TIDYLIST})..."
 
 	for arg in "${@}" ; do
-		if [ "${arg}" == "gitconfig" ] ; then
+		if [ "${arg:0:1}" == "_" ] ; then
+			argf=${arg:1}
+		else
+			argf=${arg}
+		fi
+
+		if [ "${argf}" == "gitconfig" ] ; then
 			ISGITCONF=true
 
 			if [ "${GITVERSION}" == "1" ] ; then
 				TIMESTAMP=$(date +%s)
-				cp "${HOME}/.${arg}" "${HOME}/${arg}-${TIMESTAMP}.backup"
+				cp "${HOME}/.${argf}" "${HOME}/${argf}-${TIMESTAMP}.backup"
 			fi
 		fi
 
-		if [ -r "_${arg}" ] ; then
-			echo "Copying _${arg} to ${HOME}/.${arg}"
-			cp "_${arg}" "${HOME}/.${arg}"
+		if [ -r "_${argf}" ] ; then
+			echo "Copying _${argf} to ${HOME}/.${argf}"
+
+			if [ -f "_${argf}" ] ; then
+				cp "_${argf}" "${HOME}/.${argf}"
+			fi
+
+			if [ -d "_${argf}" ] ; then
+				if [ "${argf: -1}" == "/" ] ; then
+					argdf=${argf:0:-1}
+				else
+					argdf=${argf}
+				fi
+
+				if [ ! -d "${HOME}/.${argdf}/" ] ; then
+					mkdir "${HOME}/.${argdf}/"
+				fi
+
+				rsync -arvl "_${argdf}/" "${HOME}/.${argdf}/"
+			fi
 		else
-			echo "Could not find _${arg}"
+			echo "Could not find _${argf}"
 		fi
 	done
 else
