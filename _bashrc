@@ -56,23 +56,25 @@ esac
 if [ "${color_prompt}" == "yes" ] ; then
     # Set our prompt dependant on user.
     if [ $EUID -ne 0 ] ; then
-    	PS1="\[$(tput bold)\][\[$(tput sgr0)\] \[$(tput bold)\]\u"
-		PS1+="\[$(tput sgr0)\]\[\033[38;5;9m\]@"
-		PS1+="\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\]${CUSTHOST}:" 
-		PS1+="\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;255m\]\w" 
-		PS1+="\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] " 
-		PS1+="\[$(tput bold)\]]\[$(tput sgr0)\] \[$(tput sgr0)\]" 
-		PS1+="\[\033[38;5;7m\]\\$\[$(tput sgr0)\] "
+    	PS1='\[$(tput bold)\][\[$(tput sgr0)\] \[$(tput bold)\]\u'
+		PS1+='\[$(tput sgr0)\]\[\033[38;5;9m\]@'
+		PS1+='\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\]${CUSTHOST}:' 
+		PS1+='\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;255m\]\w' 
+		PS1+='\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] ' 
+        PS1+='\[$(tput bold)\]]\[$(tput sgr0)\]' 
+		PS1+='\[\033[38;5;196m\]$(__git_ps1)\[$(tput sgr0)\] ' 
+		PS1+='\[\033[38;5;7m\]\$\[$(tput sgr0)\] '
     else
-        PS1="\[$(tput bold)\][\[$(tput sgr0)\] " 
-		PS1+="\[$(tput bold)\]\[\033[38;5;9m\]\u" 
-		PS1+="\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]" 
-		PS1+="\[\033[38;5;241m\]${CUSTHOST}\[$(tput sgr0)\]\[$(tput sgr0)\]" 
-		PS1+="\[\033[38;5;15m\]:\[$(tput bold)\]\[$(tput sgr0)\]" 
-		PS1+="\[\033[38;5;7m\]\w\[$(tput sgr0)\]\[$(tput sgr0)\]" 
-		PS1+="\[\033[38;5;15m\] \[$(tput bold)\]]\[$(tput sgr0)\] " 
-		PS1+="\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;9m\]\\$" 
-		PS1+="\[$(tput sgr0)\]\[$(tput sgr0)\] "
+        PS1='\[$(tput bold)\][\[$(tput sgr0)\] ' 
+		PS1+='\[$(tput bold)\]\[\033[38;5;9m\]\u' 
+		PS1+='\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]' 
+		PS1+='\[\033[38;5;241m\]${CUSTHOST}\[$(tput sgr0)\]\[$(tput sgr0)\]' 
+		PS1+='\[\033[38;5;15m\]:\[$(tput bold)\]\[$(tput sgr0)\]' 
+		PS1+='\[\033[38;5;7m\]\w\[$(tput sgr0)\]\[$(tput sgr0)\]' 
+		PS1+='\[\033[38;5;15m\] \[$(tput bold)\]]\[$(tput sgr0)\]' 
+		PS1+='\[\033[38;5;196m\]$(__git_ps1)\[$(tput sgr0)\] ' 
+		PS1+='\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;9m\]\$' 
+		PS1+='\[$(tput sgr0)\]\[$(tput sgr0)\] '
     fi
 else
     PS1="[ \u@\${CUSTHOST}:\w ] \\$ "
