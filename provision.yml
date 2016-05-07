@@ -1,0 +1,32 @@
+---
+- name: Provision OS
+  hosts: all
+  tasks:
+    - name: Upgrade OS
+      become: yes
+      become_method: sudo
+      apt: upgrade=dist update_cache=yes
+
+    - name: Install desired packages
+      become: yes
+      become_method: sudo
+      apt: name={{ item }} state=latest
+      with_items:
+        - vim
+        - git
+        - tmux
+        - irssi
+        - mutt
+        - i3
+        - i3lock
+        - i3status
+        - uxterm
+        - scrot
+        - feh
+        - suckless-tools
+        - imagemagick
+        - dmenu
+        - xinit
+
+    - name: Clone git repository
+      git: repo=git://github.com/xanmanning/dotfiles.git dest=/vagrant/dotfiles
