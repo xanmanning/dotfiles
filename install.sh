@@ -9,6 +9,10 @@ ISGITCONF=false
 ISMUTTCONF=false
 TTYORIG=$(stty -g)
 GITVERSION=$(git --version | awk '{ print $3 }' | awk -F. '{ print $1 }')
+BACKUPDIR="${HOME}/.config_backup/$(date +%s)"
+
+echo "Creating backup directory: ${BACKUPDIR}"
+mkdir -p ${BACKUPDIR}
 
 if [ ${#} -gt 0 ] ; then
 	TIDYLIST=$(echo "${@}" | sed -e "s/ /, /g")
@@ -41,6 +45,7 @@ if [ ${#} -gt 0 ] ; then
 			echo "Copying _${argf} to ${HOME}/.${argf}"
 
 			if [ -f "_${argf}" ] ; then
+                cp "${HOME}/.${argf}" "${BACKUPDIR}/_${argf}"
 				cp "_${argf}" "${HOME}/.${argf}"
 			fi
 
@@ -53,6 +58,8 @@ if [ ${#} -gt 0 ] ; then
 
 				if [ ! -d "${HOME}/.${argdf}/" ] ; then
 					mkdir "${HOME}/.${argdf}/"
+                else
+                    cp -r "${HOME}/.${argdf}" "${BACKUPDIR}/_${argdf}"
 				fi
 
 				rsync -arvl "_${argdf}/" "${HOME}/.${argdf}/"
@@ -70,8 +77,24 @@ else
 	fi
 
 	for CONFIG in _* ; do
+        if [ -r "${HOME}/.${CONFIG:1}" ] ; then
+            cp -r "${HOME}/.${CONFIG:1}" \
+                "${BACKUPDIR}/${CONFIG}"
+        fi
+
 		echo "Copying ${CONFIG} to ${HOME}/.${CONFIG:1}"
-		cp "${CONFIG}" "${HOME}/.${CONFIG:1}"
+
+        if [ -f "${CONFIG}" ] ; then
+    		cp "${CONFIG}" "${HOME}/.${CONFIG:1}"
+        fi
+
+        if [ -d "${CONFIG}" ] ; then
+            if [ ! -d "${HOME}/.${CONFIG:1}" ] ; then
+                mkdir -p "${HOME}/.${CONFIG:1}"
+            fi
+
+            rsync -arvl "${CONFIG/}" "${HOME}/.${CONFIG:1}"
+        fi
 	done
 
 	echo ""
