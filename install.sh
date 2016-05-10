@@ -202,7 +202,7 @@ if ${ISMUTTCONF} ; then
 		fi
 	done
 
-    smtp_url="smtp:\/\/${googlemail}@smtp.gmail.com:587"
+	smtp_url="smtp:\/\/${googlemail}@smtp.gmail.com:587"
 
 	sed -i "s/set realname =$/set realname = '${realname}'/" ~/.muttrc
 	sed -i "s/set from =$/set from = '${googlemail}'/" ~/.muttrc

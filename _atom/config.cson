@@ -1,0 +1,12 @@
+"*":
+  core:
+    projectHome: "/home/xanmanning/git"
+  editor:
+    autoIndentOnPaste: false
+    fontFamily: "hack"
+    fontSize: 12
+    invisibles: {}
+    showIndentGuide: true
+    tabLength: 4
+  welcome:
+    showOnStartup: false
