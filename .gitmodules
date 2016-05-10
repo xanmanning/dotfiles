@@ -4,3 +4,6 @@
 [submodule "lib/vim/colors/solarized"]
 	path = lib/vim/colors/solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "lib/fonts/hack"]
+	path = lib/fonts/hack
+	url = git://github.com/chrissimpkins/Hack.git
