@@ -45,7 +45,10 @@ if [ ${#} -gt 0 ] ; then
 			echo "Copying _${argf} to ${HOME}/.${argf}"
 
 			if [ -f "_${argf}" ] ; then
-                cp "${HOME}/.${argf}" "${BACKUPDIR}/_${argf}"
+				if [ -f "${HOME}/.${argf}" ] ; then
+					cp "${HOME}/.${argf}" "${BACKUPDIR}/_${argf}"
+				fi
+
 				cp "_${argf}" "${HOME}/.${argf}"
 			fi
 
@@ -58,8 +61,8 @@ if [ ${#} -gt 0 ] ; then
 
 				if [ ! -d "${HOME}/.${argdf}/" ] ; then
 					mkdir "${HOME}/.${argdf}/"
-                else
-                    cp -r "${HOME}/.${argdf}" "${BACKUPDIR}/_${argdf}"
+				else
+					cp -r "${HOME}/.${argdf}" "${BACKUPDIR}/_${argdf}"
 				fi
 
 				rsync -arvl "_${argdf}/" "${HOME}/.${argdf}/"
@@ -77,24 +80,24 @@ else
 	fi
 
 	for CONFIG in _* ; do
-        if [ -r "${HOME}/.${CONFIG:1}" ] ; then
-            cp -r "${HOME}/.${CONFIG:1}" \
-                "${BACKUPDIR}/${CONFIG}"
-        fi
+		if [ -r "${HOME}/.${CONFIG:1}" ] ; then
+			cp -r "${HOME}/.${CONFIG:1}" \
+				"${BACKUPDIR}/${CONFIG}"
+		fi
 
 		echo "Copying ${CONFIG} to ${HOME}/.${CONFIG:1}"
 
-        if [ -f "${CONFIG}" ] ; then
-    		cp "${CONFIG}" "${HOME}/.${CONFIG:1}"
-        fi
+		if [ -f "${CONFIG}" ] ; then
+			cp "${CONFIG}" "${HOME}/.${CONFIG:1}"
+		fi
 
-        if [ -d "${CONFIG}" ] ; then
-            if [ ! -d "${HOME}/.${CONFIG:1}" ] ; then
-                mkdir -p "${HOME}/.${CONFIG:1}"
-            fi
+		if [ -d "${CONFIG}" ] ; then
+			if [ ! -d "${HOME}/.${CONFIG:1}" ] ; then
+				mkdir -p "${HOME}/.${CONFIG:1}"
+			fi
 
-            rsync -arvl "${CONFIG/}" "${HOME}/.${CONFIG:1}"
-        fi
+			rsync -arvl "${CONFIG/}" "${HOME}/.${CONFIG:1}"
+		fi
 	done
 
 	echo ""
@@ -199,11 +202,13 @@ if ${ISMUTTCONF} ; then
 		fi
 	done
 
+    smtp_url="smtp:\/\/${googlemail}@smtp.gmail.com:587"
+
 	sed -i "s/set realname =$/set realname = '${realname}'/" ~/.muttrc
 	sed -i "s/set from =$/set from = '${googlemail}'/" ~/.muttrc
 	sed -i "s/set imap_user =$/set imap_user = '${googlemail}'/" ~/.muttrc
 	sed -i "s/set imap_pass =$/set imap_pass = '${mailpass}'/" ~/.muttrc
-	sed -i "s/set smtp_url =$/set smtp_url = 'smtp:\/\/${googlemail}@smtp.gmail.com:587'/" ~/.muttrc
+	sed -i "s/set smtp_url =$/set smtp_url = '${smtp_url}'/" ~/.muttrc
 	sed -i "s/set smtp_pass = $/set smtp_pass = '${mailpass}'/" ~/.muttrc
 
 	mailpass=""
