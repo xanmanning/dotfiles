@@ -161,6 +161,14 @@ if has('win32')
 
 	" Auto change directory on file opening.
 	set autochdir
+
+	" Check for AirLine
+	if filereadable(expand("~/vimfiles/autoload/airline.vim"))
+		if has('gui_running')
+		    set laststatus=2
+			let g:airline_theme="jellybeans"
+		endif
+	endif
 else
 	" *NIX Config
 	if has('unix')
@@ -183,6 +191,14 @@ else
 
 		" Temp file path on *NIX
 		set directory=~/.vim/tmp
+
+		" Check for AirLine
+		if filereadable(expand("~/.vim/autoload/airline.vim"))
+			if has('gui_running')
+			    set laststatus=2
+				let g:airline_theme="jellybeans"
+			endif
+		endif
 	endif
 endif
 
