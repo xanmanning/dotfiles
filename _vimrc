@@ -163,13 +163,11 @@ if has('win32')
 	set autochdir
 
 	" Check for AirLine
-	if filereadable("~/vimfiles/autoload/airline.vim")
-		set laststatus=2
+	if filereadable(expand("~/vimfiles/autoload/airline.vim"))
 		if has('gui_running')
+		    set laststatus=2
 			let g:airline_theme="jellybeans"
-		else
-			let g:airline_theme="durant"
-		fi
+		endif
 	endif
 else
 	" *NIX Config
@@ -195,13 +193,11 @@ else
 		set directory=~/.vim/tmp
 
 		" Check for AirLine
-		if filereadable("~/.vim/autoload/airline.vim")
-			set laststatus=2
+		if filereadable(expand("~/.vim/autoload/airline.vim"))
 			if has('gui_running')
+			    set laststatus=2
 				let g:airline_theme="jellybeans"
-			else
-				let g:airline_theme="durant"
-			fi
+			endif
 		endif
 	endif
 endif
