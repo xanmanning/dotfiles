@@ -59,6 +59,12 @@ set cm=blowfish
 " Set invisible characters
 set listchars=tab:>-,trail:.,nbsp:.,extends:>,precedes:<,eol:$
 
+" AirLine configuration
+let g:airline_right_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_left_alt_sep= ''
+let g:airline_left_sep = ''
+
 " Variable to get the current file name.
 let b:currentfile = expand('%:p')
 
@@ -88,7 +94,7 @@ set nospell
 set spelllang=en
 set spellsuggest=10
 
-" Always use forward slashes in file paths 
+" Always use forward slashes in file paths
 set shellslash
 
 " Don't bug me with error bells and visual bells
@@ -149,10 +155,10 @@ endfunction
 if has('win32')
 	" If we have a currentfile set, change directory to
 	" $USERPROFILE (Windows Specific)
-	if strlen(b:currentfile) < 1 
+	if strlen(b:currentfile) < 1
 		chdir $USERPROFILE
 	endif
-	
+
 	" Backup file path on Windows
 	set backupdir=~/vimfiles/backup
 
@@ -165,7 +171,7 @@ if has('win32')
 	" Check for AirLine
 	if filereadable(expand("~/vimfiles/autoload/airline.vim"))
 		if has('gui_running')
-		    set laststatus=2
+			set laststatus=2
 			let g:airline_theme="jellybeans"
 		endif
 	endif
@@ -195,7 +201,7 @@ else
 		" Check for AirLine
 		if filereadable(expand("~/.vim/autoload/airline.vim"))
 			if has('gui_running')
-			    set laststatus=2
+				set laststatus=2
 				let g:airline_theme="jellybeans"
 			endif
 		endif
