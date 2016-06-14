@@ -7,3 +7,9 @@
 [submodule "lib/fonts/hack"]
 	path = lib/fonts/hack
 	url = git://github.com/chrissimpkins/Hack.git
+[submodule "lib/vim/airline"]
+	path = lib/vim/airline
+	url = git://github.com/vim-airline/vim-airline.git
+[submodule "lib/vim/airline-themes"]
+	path = lib/vim/airline-themes
+	url = git://github.com/vim-airline/vim-airline-themes.git
