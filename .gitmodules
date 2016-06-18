@@ -1,15 +1,36 @@
 [submodule "lib/vim/colors/jellybeans"]
-	path = lib/vim/colors/jellybeans
+	path = _vim/bundle/jellybeans
 	url = git://github.com/nanotech/jellybeans.vim.git
 [submodule "lib/vim/colors/solarized"]
-	path = lib/vim/colors/solarized
+	path = _vim/bundle/solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
 [submodule "lib/fonts/hack"]
 	path = lib/fonts/hack
 	url = git://github.com/chrissimpkins/Hack.git
 [submodule "lib/vim/airline"]
-	path = lib/vim/airline
+	path = _vim/bundle/airline
 	url = git://github.com/vim-airline/vim-airline.git
 [submodule "lib/vim/airline-themes"]
-	path = lib/vim/airline-themes
+	path = _vim/bundle/airline-themes
 	url = git://github.com/vim-airline/vim-airline-themes.git
+[submodule "lib/vim/surround"]
+	path = _vim/bundle/surround
+	url = git://github.com/tpope/vim-surround
+[submodule "lib/vim/commentary"]
+	path = _vim/bundle/commentary
+	url = git://github.com/tpope/vim-commentary
+[submodule "lib/vim/fugitive"]
+	path = _vim/bundle/fugitive
+	url = git://github.com/tpope/vim-fugitive
+[submodule "_vim"]
+	path = _vim
+	url = git://github.com/tpope/vim-pathogen
+[submodule "_vim/bundle/pathogen"]
+	path = _vim/bundle/pathogen
+	url = git://github.com/tpope/vim-pathogen
+[submodule "_vim/bundle/material"]
+	path = _vim/bundle/material
+	url = git://github.com/jscappini/material.vim
+[submodule "_vim/bundle/hybrid_material"]
+	path = _vim/bundle/hybrid_material
+	url = git://github.com/kristijanhusak/vim-hybrid-material
