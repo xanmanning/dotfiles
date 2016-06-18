@@ -5,6 +5,10 @@
 " == Global Settings ==
 "
 
+" Start Pathogen
+runtime bundle/pathogen/autoload/pathogen.vim
+execute pathogen#infect()
+
 " No Compatible and Tmux Fix
 set nocompatible
 set t_ut=
@@ -139,9 +143,21 @@ function! ToggleCopy()
 	if &mouse == 'a'
 		set mouse=
 		set nonumber
+		set norelativenumber
 	else
 		set mouse=a
 		set number
+	endif
+endfunction
+
+" Function for handling relative line numbering
+function! ToggleNumber()
+	set number
+	set mouse=a
+	if &relativenumber == 1
+		set norelativenumber
+	else
+		set relativenumber
 	endif
 endfunction
 
@@ -169,7 +185,7 @@ if has('win32')
 	set autochdir
 
 	" Check for AirLine
-	if filereadable(expand("~/vimfiles/autoload/airline.vim"))
+	if filereadable(expand("~/vimfiles/bundle/airline/autoload/airline.vim"))
 		if has('gui_running')
 			set laststatus=2
 			let g:airline_theme="jellybeans"
@@ -199,7 +215,7 @@ else
 		set directory=~/.vim/tmp
 
 		" Check for AirLine
-		if filereadable(expand("~/.vim/autoload/airline.vim"))
+		if filereadable(expand("~/.vim/bundle/airline/autoload/airline.vim"))
 			if has('gui_running')
 				set laststatus=2
 				let g:airline_theme="jellybeans"
@@ -217,9 +233,18 @@ endif
 " Set toggle paste on <F10>
 set pastetoggle=<F10>
 
+" Toggle copy on <F9>
+" Disables Line Numbering and Mouse
+if !has('gui_running')
+	map <F9> :call ToggleCopy()<CR>
+endif
+
 " Open up explorer with <F8>
 " Only in normal mode
 nmap <F8> :Explore<CR>
+
+" Relative Line Numbering Toggle
+map <F7> :call ToggleNumber()<CR>
 
 " RXVT compatibility for direction keys
 " Insert mode.
@@ -239,12 +264,6 @@ imap <C-v> <ESC>"+pa
 " Save shortcut (^s)
 inoremap <C-s> <ESC>:w<CR>a
 nnoremap <C-s> :w<CR>
-
-" Toggle copy on <F9>
-" Disables Line Numbering and Mouse
-if !has('gui_running')
-	map <F9> :call ToggleCopy()<CR>
-endif
 
 
 
