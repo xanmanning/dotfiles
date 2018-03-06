@@ -1,0 +1,4 @@
+export TMUX_IDE=${TMUX}
+export PROJECT_HOME=~/code/
+export DJANGO_RESOURCES_HOME=~/code/
+source /usr/local/bin/hive-bootstrap.sh

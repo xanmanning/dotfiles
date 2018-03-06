@@ -1,0 +1,138 @@
+#
+# Xan's ~/.bashrc
+#
+
+# Set our term
+TERM="xterm-256color"
+
+# Non-Interactive Shell Handling
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# Bash Completion
+if ! shopt -oq posix ; then
+    if [[ -f /usr/share/bash-completion/bash_completion ]] ; then
+        source /usr/share/bash-completion/bash_completion
+    elif [[ -f /etc/bash_completion ]] ; then
+        source /etc/bash_completion
+    fi
+fi
+
+if [[ -d "${HOME}/.bash_completion.d" ]] ; then
+    for CONFIG in ${HOME}/.bash_completion.d/*; do
+        source "${CONFIG}"
+    done
+fi
+
+# Manage History
+HISTCONTROL=ignoreboth
+HISTTIMEFORMAT="[%F %H:%M] "
+shopt -s histappend
+HISTSIZE=10000
+HISTFILESIZE=20000
+
+# Custom Hostname
+CUSTHOST="$(hostname)"
+
+# Set our default editor
+EDITOR=vim
+VISUAL=vim
+
+# Pager
+PAGER=less
+
+# Set up our mail
+MAIL="/mail/${LOGNAME:?}"
+
+# Check for fancy prompt
+case "${TERM}" in
+    xterm-color) color_prompt=yes ;;
+    xterm-256color) color_prompt=yes ;;
+    screen-256color) color_prompt=yes ;;
+    *) color_prompt=no ;;
+esac
+
+if [[ "${color_prompt}" == "yes" ]] ; then
+    # Set our prompt dependant on user.
+    if [[ $EUID -ne 0 ]] ; then
+        if [[ -f "${HOME}/.bash_prompt" ]] ; then
+            source "${HOME}/.bash_prompt"
+        else
+            PS1='\[$(tput bold)\][\[$(tput sgr0)\] \[$(tput bold)\]\u'
+            PS1+='\[$(tput sgr0)\]\[\033[38;5;9m\]@'
+            PS1+='\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\]'
+            PS1+='${CUSTHOST}:'
+            PS1+='\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;255m\]\w'
+            PS1+='\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] '
+            PS1+='\[$(tput bold)\]]\[$(tput sgr0)\]'
+            PS1+='\[\033[38;5;196m\]$(__git_ps1)\[$(tput sgr0)\] '
+            PS1+='\[\033[38;5;7m\]\$\[$(tput sgr0)\] '
+        fi
+    else
+        PS1='\[$(tput bold)\][\[$(tput sgr0)\] '
+        PS1+='\[$(tput bold)\]\[\033[38;5;9m\]\u'
+        PS1+='\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]'
+        PS1+='\[\033[38;5;241m\]${CUSTHOST}\[$(tput sgr0)\]\[$(tput sgr0)\]'
+        PS1+='\[\033[38;5;15m\]:\[$(tput bold)\]\[$(tput sgr0)\]'
+        PS1+='\[\033[38;5;7m\]\w\[$(tput sgr0)\]\[$(tput sgr0)\]'
+        PS1+='\[\033[38;5;15m\] \[$(tput bold)\]]\[$(tput sgr0)\]'
+        PS1+='\[\033[38;5;196m\]$(__git_ps1)\[$(tput sgr0)\] '
+        PS1+='\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;9m\]\$'
+        PS1+='\[$(tput sgr0)\]\[$(tput sgr0)\] '
+    fi
+else
+    PS1="[ \u@\${CUSTHOST}:\w ] \\$ "
+fi
+
+# Enable color support of ls and also add handy aliases
+if [[ "$(uname)" == "Darwin" ]] ; then
+    alias ls='ls -GFh'
+    export LSCOLORS=ExFxBxDxCxegedabagacad
+else
+    if [[ -x /usr/bin/dircolors ]] ; then
+        test -r "${HOME}/.dircolors" \
+            && eval "$(dircolors -b ${HOME}/.dircolors)" ||
+                eval "$(dircolors -b)"
+
+        alias ls='ls --color=auto -Fh'
+
+        alias grep='grep --color=auto'
+        alias fgrep='fgrep --color=auto'
+        alias egrep='egrep --color=auto'
+    fi
+fi
+
+# Some aliases.
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+
+# Fixes for tmux misbehaving
+if [[ ! -z "${TMUX}" ]] ; then
+    alias irssi='export TERM=screen-256color ; irssi'
+    alias mutt='export TERM=screen-256color ; mutt'
+fi
+
+# Quirks!
+if [[ -f "${HOME}/.quirk" ]] ; then
+    source "${HOME}/.quirk"
+fi
+
+# Folder structure setup
+if [[ ! -d "${HOME}/.vim/backup" ]] ; then
+    mkdir -p "${HOME}/.vim/backup"
+fi
+
+if [[ ! -d "${HOME}/.vim/tmp" ]] ; then
+    mkdir -p "${HOME}/.vim/tmp"
+fi
+
+if [[ -d "${HOME}/.local/bin" ]] ; then
+    PATH="${HOME}/.local/bin:${PATH}"
+fi
+
+# Export it all.
+export PS1 MAIL EDITOR TERM VISUAL PAGER PATH

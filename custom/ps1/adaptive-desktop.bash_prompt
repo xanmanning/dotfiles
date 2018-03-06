@@ -1,0 +1,6 @@
+PS1='[ \[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;208m\]\u'
+PS1+='\[$(tput sgr0)\]\[\033[38;5;15m\]@${CUSTHOST}\[$(tput sgr0)\]: '
+PS1+='\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;39m\]\w'
+PS1+='\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] '
+PS1+=']\[\033[38;5;196m\]$(__git_ps1)\[$(tput sgr0)\] '
+PS1+='\[$(tput bold)\]\$\[$(tput sgr0)\] '

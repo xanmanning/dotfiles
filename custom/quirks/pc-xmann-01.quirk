@@ -1,0 +1,5 @@
+export TMUX_IDE=${TMUX}
+export PATH="${HOME}/.local/bin:${PATH}"
+alias pylertly="python ${HOME}/git/alert-dashboard/alerts.py"
+alias rdp="rdesktop-vrdp -u xmanning -g $(xrandr | sed -e 's/0x1/0 x 1/' | awk '/HDMI1/ { print int($4/1.28) $5 int($6/1.2) }' | sed 's/,//g')"
+alias workspace="tmuxp load workspace"

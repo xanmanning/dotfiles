@@ -1,0 +1,9 @@
+#!/bin/bash
+PS1='\[$(tput bold)\][\[$(tput sgr0)\]\[$(tput bold)\] \u'
+PS1+='\[$(tput sgr0)\]\[\033[38;5;8m\]@'
+PS1+='\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\]${CUSTHOST}:'
+PS1+='\[$(tput bold)\]\[$(tput sgr0)\]\[\033[38;5;255m\]\w'
+PS1+='\[$(tput sgr0)\]\[$(tput sgr0)\]\[\033[38;5;15m\] '
+PS1+='\[$(tput bold)\]]\[$(tput sgr0)\]'
+PS1+='\[\033[38;5;196m\]$(__git_ps1)\[$(tput sgr0)\]'
+PS1+='\[\033[38;5;7m\] \$\[$(tput sgr0)\] '
