@@ -5,6 +5,21 @@
 " == Global Settings ==
 "
 
+" No Compatible and Tmux Fix
+set nocompatible
+set t_ut=
+
+" Tmux Session Variable
+let in_tmux=$TMUX_IDE
+
+" Empty list of disabled plugins
+let g:pathogen_disabled = []
+
+" Disable airline if these conditions are not met
+if !has('gui_running') && in_tmux == ''
+	call add(g:pathogen_disabled, 'airline')
+endif
+
 " Start Pathogen
 " Set paths for Windows and *nix.
 if has('win32')
@@ -17,13 +32,6 @@ if filereadable(expand(pathogen_path))
 	runtime bundle/pathogen/autoload/pathogen.vim
 	execute pathogen#infect()
 endif
-
-" No Compatible and Tmux Fix
-set nocompatible
-set t_ut=
-
-" Tmux Session Variable
-let in_tmux=$TMUX_IDE
 
 " Try using the hybrid_material colourscheme
 if has('gui_running') || in_tmux != ''
@@ -201,6 +209,7 @@ if has('win32')
 		if has('gui_running') || in_tmux != ''
 			set laststatus=2
 			let g:airline_theme="hybrid"
+	        let g:airline#extensions#tabline#enabled = 1
 		endif
 	endif
 else
@@ -231,6 +240,7 @@ else
 			if has('gui_running') || in_tmux != ''
 				set laststatus=2
 				let g:airline_theme="hybrid"
+	            let g:airline#extensions#tabline#enabled = 1
 			endif
 		endif
 	endif

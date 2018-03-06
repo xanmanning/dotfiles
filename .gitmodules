@@ -1,0 +1,39 @@
+[submodule "_vim/bundle/jellybeans"]
+	path = _vim/bundle/jellybeans
+	url = git://github.com/nanotech/jellybeans.vim.git
+[submodule "_vim/bundle/solarized"]
+	path = _vim/bundle/solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "lib/fonts/hack"]
+	path = lib/fonts/hack
+	url = git://github.com/chrissimpkins/Hack.git
+[submodule "_vim/bundle/airline"]
+	path = _vim/bundle/airline
+	url = git://github.com/vim-airline/vim-airline.git
+[submodule "_vim/bundle/airline-themes"]
+	path = _vim/bundle/airline-themes
+	url = git://github.com/vim-airline/vim-airline-themes.git
+[submodule "_vim/bundle/surround"]
+	path = _vim/bundle/surround
+	url = git://github.com/tpope/vim-surround
+[submodule "_vim/bundle/commentary"]
+	path = _vim/bundle/commentary
+	url = git://github.com/tpope/vim-commentary
+[submodule "_vim/bundle/fugitive"]
+	path = _vim/bundle/fugitive
+	url = git://github.com/tpope/vim-fugitive
+[submodule "_vim/bundle/pathogen"]
+	path = _vim/bundle/pathogen
+	url = git://github.com/tpope/vim-pathogen
+[submodule "_vim/bundle/material"]
+	path = _vim/bundle/material
+	url = git://github.com/jscappini/material.vim
+[submodule "_vim/bundle/hybrid_material"]
+	path = _vim/bundle/hybrid_material
+	url = git://github.com/kristijanhusak/vim-hybrid-material
+[submodule "_vim/bundle/vimwiki"]
+	path = _vim/bundle/vimwiki
+	url = git://github.com/vimwiki/vimwiki.git
+[submodule "_vim/bundle/vim-hclfmt"]
+	path = _vim/bundle/vim-hclfmt
+	url = git://github.com/fatih/vim-hclfmt.git
