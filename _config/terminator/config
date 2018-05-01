@@ -1,6 +1,7 @@
 [global_config]
   borderless = True
   handle_size = 1
+  putty_paste_style = True
   title_transmit_bg_color = "#c88d00"
   window_state = maximise
 [keybindings]
@@ -17,9 +18,9 @@
 [profiles]
   [[default]]
     background_darkness = 0.83
-    background_image = None
     background_type = transparent
     copy_on_selection = True
+    cursor_color = "#ffffff"
     foreground_color = "#ffffff"
     scrollback_lines = 1000
     scrollbar_position = hidden
