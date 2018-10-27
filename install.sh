@@ -14,17 +14,19 @@ TTYORIG=$(stty -g)
 GITVERSION=$(git --version | awk '{ print $3 }' | awk -F. '{ print $1 }')
 BACKUPDIR="${HOME}/.config_backup/$(date +%s)"
 LONG_HOSTNAME=$(hostname)
-SHORT_HOSTNAME=$(echo ${LONG_HOSTNAME} | awk -F. '{ print $1 }')
+SHORT_HOSTNAME=$(echo "${LONG_HOSTNAME}" | awk -F. '{ print $1 }')
 
 echo "Creating backup directory: ${BACKUPDIR}"
-mkdir -p ${BACKUPDIR}
+mkdir -p "${BACKUPDIR}"
 
 if [ ${#} -gt 0 ] ; then
-    TIDYLIST=$(echo "${@}" | sed -e "s/ /, /g")
+    LIST=( "${@}" )
+    CONCATLIST="${LIST[*]}"
+    TIDYLIST="${CONCATLIST// /, }"
 
     echo "Installing config files (${TIDYLIST})..."
 
-    for arg in "${@}" ; do
+    for arg in ${LIST[*]} ; do
         if [ "${arg:0:1}" == "_" ] ; then
             argf=${arg:1}
         else
@@ -126,7 +128,7 @@ if ${ISGITCONF} ; then
     echo ""
     echo "[.gitconfig settings]"
     echo ""
-    read -p "What is your git username? [$(whoami)]: " gituser
+    read -r -p "What is your git username? [$(whoami)]: " gituser
 
     if [ ${#gituser} -lt 2 ] ; then
         gituser="$(whoami)"
@@ -138,7 +140,7 @@ if ${ISGITCONF} ; then
         sed -i "s/name =$/name = ${gituser}/" ~/.gitconfig
     fi
 
-    read -p "What is your git email? [$(whoami)@$(hostname)]: " gitmail
+    read -r -p "What is your git email? [$(whoami)@$(hostname)]: " gitmail
 
     if [ ${#gitmail} -lt 2 ] ; then
         gitmail="$(whoami)@$(hostname)"
@@ -176,13 +178,13 @@ if ${ISMUTTCONF} ; then
         mkdir ~/.mutt/cache
     fi
 
-    read -p "What is your name? [$(whoami)]:  " realname
+    read -r -p "What is your name? [$(whoami)]:  " realname
 
     if [ ${#realname} -lt 2 ] ; then
         realname=$(whoami)
     fi
 
-    read -p "What is your Google email? [$(whoami)@gmail.com]:  " googlemail
+    read -r -p "What is your Google email? [$(whoami)@gmail.com]:  " googlemail
 
     if [ ${#googlemail} -lt 2 ] ; then
         googlemail="$(whoami)@gmail.com"
@@ -192,14 +194,14 @@ if ${ISMUTTCONF} ; then
         echo ""
 
         stty -echo
-        read -p "What is your Password:  " gpassa
+        read -r -p "What is your Password:  " gpassa
 
         echo ""
-        read -p "Repeat:  " gpassb
+        read -r -p "Repeat:  " gpassb
 
         if [ ${#gpassa} -gt 2 ] ; then
             if [ "${gpassa}" == "${gpassb}" ] ; then
-                stty ${TTYORIG}
+                stty "${TTYORIG}"
                 mailpass="${gpassa}"
                 gpassa=""
                 gpassb=""

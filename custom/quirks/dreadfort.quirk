@@ -1,0 +1,2 @@
+export TMUX_IDE=true
+export PATH="/usr/local/go/bin:${PATH}"
