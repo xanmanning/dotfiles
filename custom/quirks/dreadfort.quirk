@@ -1,2 +1,5 @@
 export TMUX_IDE=true
-export PATH="/usr/local/go/bin:${PATH}"
+export PATH="${HOME}/bin:/usr/local/go/bin:${PATH}"
+export PATH="${PATH}:$(go env GOPATH)/bin"
+export GOPATH=$(go env GOPATH)
+export VAULT_ADDR="http://127.0.0.1:8200"
