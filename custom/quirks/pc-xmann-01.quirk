@@ -1,5 +1,29 @@
 export TMUX_IDE=${TMUX}
-export PATH="${HOME}/.local/bin:${PATH}"
-alias pylertly="python ${HOME}/git/alert-dashboard/alerts.py"
-alias rdp="rdesktop-vrdp -u xmanning -g $(xrandr | sed -e 's/0x1/0 x 1/' | awk '/HDMI1/ { print int($4/1.28) $5 int($6/1.2) }' | sed 's/,//g')"
+export PATH="${HOME}/bin:${HOME}/.local/bin:${PATH}"
+source /usr/share/git-core/contrib/completion/git-prompt.sh
+alias pylertly="python ${HOME}/git/pylertly/alerts.py"
+alias jagonometer="python ${HOME}/git/jagonometer/jagonometer.py"
+alias BS0="sed -i 's/bs: [0-5]/bs: 0/' ${HOME}/bs.yml"
+alias BS1="sed -i 's/bs: [0-5]/bs: 1/' ${HOME}/bs.yml"
+alias BS2="sed -i 's/bs: [0-5]/bs: 2/' ${HOME}/bs.yml"
+alias BS3="sed -i 's/bs: [0-5]/bs: 3/' ${HOME}/bs.yml"
+alias BS4="sed -i 's/bs: [0-5]/bs: 4/' ${HOME}/bs.yml"
+alias BS5="sed -i 's/bs: [0-5]/bs: 5/' ${HOME}/bs.yml"
+alias rdp="rdesktop-vrdp -0 -u xmanning -g 1800x960"
 alias workspace="tmuxp load workspace"
+alias nuclear="ogg123 ~/nuclear.ogg"
+alias nopressure="ogg123 ~/nopressure.ogg"
+alias did="vim +'normal Go' +'r!date' ~/did.txt"
+alias vi="vim"
+alias hdbstudio="/usr/sap/hdbstudio/hdbstudio"
+
+export VAULT_ADDR="http://localhost:8200"
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+
+eval "$(rbenv init -)"
+
+vimwikisearch() {
+    grep -Rni "${@}" ${HOME}/vimwiki
+}
+
