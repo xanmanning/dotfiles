@@ -1,0 +1,16 @@
+{
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.wordWrap": "on",
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "git.autofetch": true,
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "workbench.startupEditor": "newUntitledFile",
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true
+}
